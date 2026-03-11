@@ -1,0 +1,33 @@
+{
+  "name": "typescript-type-guards",
+  "version": "1.0.0",
+  "description": "A comprehensive set of TypeScript type guards with generic factory functions",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint src tests --ext .ts",
+    "lint:fix": "eslint src tests --ext .ts --fix",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "typescript",
+    "type-guards",
+    "type-safety",
+    "guards",
+    "enum"
+  ],
+  "author": "Coderrob",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "eslint": "^8.57.0",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.2"
+  }
+}
