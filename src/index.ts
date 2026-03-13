@@ -1,45 +1,31 @@
-/**
- * typescript-type-guards
- *
- * A comprehensive set of TypeScript type guards with generic factory functions
- * that allow you to create type guards for any class, interface shape, or enum.
- */
-
-// Core types
-export type { TypeGuard, Constructor, EnumLike } from './types';
-
-// Primitive type guards
-export {
-  isString,
-  isNumber,
-  isFiniteNumber,
-  isNaN,
-  isBoolean,
-  isNull,
-  isUndefined,
-  isNullOrUndefined,
-  isSymbol,
-  isBigInt,
-  isNonEmptyString,
-  isInteger,
-} from './primitives';
-
-// Object type guards
-export {
-  isObject,
-  isFunction,
-  isDate,
-  isValidDate,
-  isRegExp,
-  isError,
-  isMap,
-  isSet,
-  isPromise,
-  isThenable,
-} from './objects';
-
-// Array type guards
-export { isArray, isNonEmptyArray, isArrayOf, isNonEmptyArrayOf } from './arrays';
-
-// Generic factory functions
-export { createTypeGuard, createEnumGuard } from './generic';
+export { isArray } from './guards/isArray';
+export { isArrayOf } from './guards/isArrayOf';
+export { isBigInt } from './guards/isBigInt';
+export { isBoolean } from './guards/isBoolean';
+export { isDate } from './guards/isDate';
+export { isDefined } from './guards/isDefined';
+export { isError } from './guards/isError';
+export { isFiniteNumber } from './guards/isFiniteNumber';
+export { isFunction } from './guards/isFunction';
+export { isInteger } from './guards/isInteger';
+export { isMap } from './guards/isMap';
+export { isNaN } from './guards/isNaN';
+export { isNonEmptyArray } from './guards/isNonEmptyArray';
+export { isNonEmptyArrayOf } from './guards/isNonEmptyArrayOf';
+export { isNonEmptyString } from './guards/isNonEmptyString';
+export { isNull } from './guards/isNull';
+export { isNullish } from './guards/isNullish';
+export { isNullOrUndefined } from './guards/isNullOrUndefined';
+export { isNumber } from './guards/isNumber';
+export { isObject } from './guards/isObject';
+export { isPromise } from './guards/isPromise';
+export { isRegExp } from './guards/isRegExp';
+export { isSet } from './guards/isSet';
+export { isString } from './guards/isString';
+export { isSymbol } from './guards/isSymbol';
+export { isThenable } from './guards/isThenable';
+export { isUndefined } from './guards/isUndefined';
+export { isValidDate } from './guards/isValidDate';
+export { createEnumGuard } from './guards/createEnumGuard';
+export { createTypeGuard } from './guards/createTypeGuard';
+export type { Constructor, EnumLike, TypeGuard } from './guards/types';
