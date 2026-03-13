@@ -71,8 +71,8 @@ export function isPromise(value: unknown): value is Promise<unknown> {
  */
 export function isThenable(value: unknown): value is PromiseLike<unknown> {
   return (
-    isObject(value) &&
+    (isObject(value) || isFunction(value)) &&
     'then' in value &&
-    typeof (value as Record<string, unknown>)['then'] === 'function'
+    typeof (value as { then: unknown }).then === 'function'
   );
 }
