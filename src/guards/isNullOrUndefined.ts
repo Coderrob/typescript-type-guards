@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { isNullish } from './isNullish';
+
 /**
- * Determines whether the given value is a `string`.
+ * Determines whether the given value is `null` or `undefined`.
+ *
+ * This is an alias for {@link isNullish} provided for semantic compatibility.
  *
  * @param value - The value to test.
- * @returns `true` when `value` is a string, `false` otherwise.
+ * @returns `true` when `value` is `null` or `undefined`, `false` otherwise.
  */
-export function isString(value: unknown): value is string {
-  return typeof value === 'string';
+export function isNullOrUndefined(value: unknown): value is null | undefined {
+  return isNullish(value);
 }

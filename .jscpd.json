@@ -1,7 +1,7 @@
 {
-  "threshold": 1,
+  "ignore": ["node_modules/**", "dist/**", "coverage/**"],
   "minLines": 5,
   "minTokens": 50,
   "reporters": ["console"],
-  "ignore": ["node_modules/**", "dist/**", "coverage/**"]
+  "threshold": 1
 }
