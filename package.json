@@ -1,36 +1,66 @@
 {
-  "name": "typescript-type-guards",
-  "version": "1.0.0",
-  "description": "TypeScript type guards",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "duplication": "jscpd src"
+  "author": {
+    "name": "Robert Lindley"
   },
-  "keywords": [
-    "typescript",
-    "type-guards"
-  ],
-  "author": "",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Coderrob/typescript-type-guards/issues"
+  },
+  "description": "Reusable TypeScript type guards for narrowing unknown values in application and library code.",
   "devDependencies": {
+    "@coderrob/eslint-plugin-zero-tolerance": "^1.1.4",
     "@types/jest": "^30.0.0",
-    "eslint": "^10.0.3",
+    "@typescript-eslint/parser": "^8.57.0",
+    "eslint": "^9.29.0",
     "jest": "^30.3.0",
     "jscpd": "^4.0.8",
     "prettier": "^3.8.1",
+    "rimraf": "^5.0.10",
     "ts-jest": "^29.4.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.57.0"
-  }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "exports": {
+    ".": {
+      "default": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "homepage": "https://github.com/Coderrob/typescript-type-guards#readme",
+  "keywords": [
+    "typescript",
+    "type-guards",
+    "typeguard",
+    "guards",
+    "runtime-validation",
+    "utility"
+  ],
+  "license": "Apache-2.0",
+  "main": "dist/index.js",
+  "name": "typescript-type-guards",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Coderrob/typescript-type-guards.git"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "duplication": "jscpd src",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "prepack": "npm run clean && npm run build",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "sideEffects": false,
+  "types": "dist/index.d.ts",
+  "version": "1.0.0"
 }

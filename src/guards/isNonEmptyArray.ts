@@ -14,11 +14,15 @@
  * limitations under the License.
  */
 /**
- * Determines whether the given value is a `string`.
+ * Determines whether the given value is a non-empty array.
+ *
+ * A non-empty array has at least one element.
  *
  * @param value - The value to test.
- * @returns `true` when `value` is a string, `false` otherwise.
+ * @returns `true` when `value` is an array with at least one element, `false` otherwise.
  */
-export function isString(value: unknown): value is string {
-  return typeof value === 'string';
+export function isNonEmptyArray(
+  value: unknown,
+): value is [unknown, ...unknown[]] {
+  return Array.isArray(value) && value.length > 0;
 }
