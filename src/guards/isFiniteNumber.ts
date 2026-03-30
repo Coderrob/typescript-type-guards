@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 /**
- * Determines whether the given value is a `string`.
+ * Determines whether the given value is a finite `number`.
  *
  * @param value - The value to test.
- * @returns `true` when `value` is a string, `false` otherwise.
+ * @returns `true` when `value` is a finite number, `false` otherwise.
  */
-export function isString(value: unknown): value is string {
-  return typeof value === 'string';
+export function isFiniteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value);
 }

@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { isDate } from './isDate';
+
 /**
- * Determines whether the given value is a `string`.
+ * Determines whether the given value is a valid (non-NaN) `Date` instance.
  *
  * @param value - The value to test.
- * @returns `true` when `value` is a string, `false` otherwise.
+ * @returns `true` when `value` is a `Date` with a valid time value, `false` otherwise.
  */
-export function isString(value: unknown): value is string {
-  return typeof value === 'string';
+export function isValidDate(value: unknown): value is Date {
+  return isDate(value) && !Number.isNaN(value.getTime());
 }
