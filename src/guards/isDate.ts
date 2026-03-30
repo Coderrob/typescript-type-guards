@@ -1,9 +1,24 @@
+/*
+ * Copyright 2026 Robert Lindley
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 /**
- * Determines whether the given value is a valid (non-NaN) `Date` instance.
+ * Determines whether the given value is a `Date` instance.
  *
  * @param value - The value to test.
- * @returns `true` when `value` is a `Date` with a valid time value, `false` otherwise.
+ * @returns `true` when `value` is a `Date`, `false` otherwise.
  */
 export function isDate(value: unknown): value is Date {
-  return value instanceof Date && !Number.isNaN(value.getTime());
+  return value instanceof Date;
 }

@@ -1,3 +1,18 @@
+/*
+ * Copyright 2026 Robert Lindley
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import {
   createEnumGuard,
   createTypeGuard,
@@ -218,14 +233,22 @@ describe('isNonEmptyArrayOf', () => {
 });
 
 describe('isObject', () => {
+  class Widget {
+    readonly id = 1;
+  }
+
   it('should return true for plain objects', () => {
     expect(isObject({})).toBe(true);
     expect(isObject({ a: 1 })).toBe(true);
+    expect(isObject(Object.create(null))).toBe(true);
   });
-  it('should return false for non-objects', () => {
+  it('should return false for arrays, class instances, and built-in objects', () => {
     expect(isObject(null)).toBe(false);
     expect(isObject([])).toBe(false);
     expect(isObject('string')).toBe(false);
+    expect(isObject(new Date())).toBe(false);
+    expect(isObject(new Map())).toBe(false);
+    expect(isObject(new Widget())).toBe(false);
   });
 });
 
@@ -241,12 +264,12 @@ describe('isFunction', () => {
 });
 
 describe('isDate', () => {
-  it('should return true for valid dates', () => {
+  it('should return true for Date instances', () => {
     expect(isDate(new Date())).toBe(true);
     expect(isDate(new Date('2020-01-01'))).toBe(true);
+    expect(isDate(new Date('invalid'))).toBe(true);
   });
-  it('should return false for invalid or non-dates', () => {
-    expect(isDate(new Date('invalid'))).toBe(false);
+  it('should return false for non-dates', () => {
     expect(isDate('2020-01-01')).toBe(false);
     expect(isDate(null)).toBe(false);
   });
@@ -372,14 +395,37 @@ describe('createTypeGuard', () => {
   it('should name the guard after the constructor', () => {
     expect(isWidget.name).toBe('isWidget');
   });
+  it('should allow an explicit guard name override', () => {
+    expect(createTypeGuard(Widget, 'CustomWidget').name).toBe('isCustomWidget');
+  });
+  it('should fall back to a safe default when the constructor name is empty', () => {
+    const AnonymousWidget = class {
+      readonly id = 1;
+    };
+
+    Object.defineProperty(AnonymousWidget, 'name', { value: '' });
+
+    expect(createTypeGuard(AnonymousWidget).name).toBe('isType');
+  });
 });
 
 describe('createEnumGuard', () => {
-  enum Color { Red = 'RED', Blue = 'BLUE' }
-  enum Status { Active = 1, Inactive = 2 }
+  enum Color {
+    Red = 'RED',
+    Blue = 'BLUE',
+  }
+  enum Status {
+    Active = 1,
+    Inactive = 2,
+  }
+  enum Size {
+    Small = 'SMALL',
+    Large = 'LARGE',
+  }
 
   const isColor = createEnumGuard(Color, 'Color');
   const isStatus = createEnumGuard(Status, 'Status');
+  const isSize = createEnumGuard(Size);
 
   it('should return true for valid string enum values', () => {
     expect(isColor('RED')).toBe(true);
@@ -397,7 +443,16 @@ describe('createEnumGuard', () => {
     expect(isStatus('Active')).toBe(false);
     expect(isStatus(3)).toBe(false);
   });
+  it('should return false for non-string and non-number values', () => {
+    expect(isSize(null)).toBe(false);
+    expect(isSize({ value: 'SMALL' })).toBe(false);
+    expect(isSize([])).toBe(false);
+  });
   it('should name the guard after the provided enum name', () => {
     expect(isColor.name).toBe('isColor');
+  });
+  it('should use the default guard name when no enum name is provided', () => {
+    expect(isSize.name).toBe('isEnumValue');
+    expect(isSize('SMALL')).toBe(true);
   });
 });
