@@ -1,0 +1,45 @@
+/*
+ * Copyright 2026 Robert Lindley
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+/**
+ * Narrows `value` to a non-null object or function.
+ *
+ * @param value - The value to test.
+ * @returns `true` when `value` is a non-null object or a callable function.
+ */
+function isObjectOrFunction(
+  value: unknown,
+): value is object | ((...args: unknown[]) => unknown) {
+  return (
+    value !== null && (typeof value === 'object' || typeof value === 'function')
+  );
+}
+
+/**
+ * Determines whether the given value is a thenable (duck-typed Promise).
+ *
+ * A thenable is any object or function with a callable `then` property,
+ * per the Promises/A+ specification.
+ *
+ * @param value - The value to test.
+ * @returns `true` when `value` has a callable `then` property, `false` otherwise.
+ */
+export function isThenable(value: unknown): value is PromiseLike<unknown> {
+  if (!isObjectOrFunction(value)) {
+    return false;
+  }
+
+  return typeof Reflect.get(value, 'then') === 'function';
+}
