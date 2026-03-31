@@ -1,0 +1,28 @@
+# Source files
+src/
+public/
+
+# Test coverage
+coverage/
+
+# Configuration files
+.editorconfig
+.jscpd.json
+.prettierignore
+.prettierrc
+eslint.config.mjs
+jest.config.js
+tsconfig.json
+
+# CI/CD
+.github/
+.gitignore
+
+# Build artifacts
+*.tsbuildinfo
+*.js.map
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
