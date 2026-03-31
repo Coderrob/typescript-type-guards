@@ -1,5 +1,9 @@
 # typescript-type-guards
 
+<p align="center">
+  <img src="public/img/typescript-type-guard-logo.png" alt="typescript-type-guards logo" />
+</p>
+
 Reusable TypeScript type guards for narrowing `unknown` values in application and library code.
 
 ## Installation
