@@ -1,28 +1,7 @@
-# Source files
-src/
-public/
+# This project uses `"files": ["dist"]` in package.json, so only files under
+# dist/ (plus standard top-level files like README/LICENSE) are published.
+# These patterns therefore only affect the contents of dist/, not the repo root.
 
-# Test coverage
-coverage/
-
-# Configuration files
-.editorconfig
-.jscpd.json
-.prettierignore
-.prettierrc
-eslint.config.mjs
-jest.config.js
-tsconfig.json
-
-# CI/CD
-.github/
-.gitignore
-
-# Build artifacts
+# Build artifacts that should not be published
 *.tsbuildinfo
 *.js.map
-
-# Dependency lock files
-package-lock.json
-yarn.lock
-pnpm-lock.yaml

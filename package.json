@@ -60,9 +60,6 @@
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "sideEffects": false,
   "types": "dist/index.d.ts",
   "version": "1.0.0"
