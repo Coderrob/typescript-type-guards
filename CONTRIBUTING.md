@@ -2,7 +2,7 @@
 
 ## Requirements
 
-- Node.js `^20.19.0`, `^22.13.0`, or `>=24.0.0`
+- Node.js `^20`, `^22`, or `^24`
 - npm
 
 ## Setup
