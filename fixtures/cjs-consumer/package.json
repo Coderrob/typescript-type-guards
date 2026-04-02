@@ -1,0 +1,7 @@
+{
+  "name": "cjs-consumer-fixture",
+  "private": true,
+  "scripts": {
+    "smoke": "node smoke.cjs"
+  }
+}
