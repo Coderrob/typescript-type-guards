@@ -18,29 +18,37 @@ import { defineConfig } from 'eslint/config';
 import zeroTolerance from '@coderrob/eslint-plugin-zero-tolerance';
 import tseslint from 'typescript-eslint';
 
+const GENERAL_IGNORES = [
+  'coverage/**',
+  'dist/**',
+  'eslint.config.mjs',
+  'node_modules/**',
+  'scripts/**',
+];
+const MAX_LINES_RULE = [
+  'error',
+  { max: 25, skipComments: true, skipBlankLines: true },
+];
+const MAX_LINES_EXEMPT_FILES = [
+  '**/*.spec.ts',
+  '**/*.test.ts',
+  '**/__tests__/**/*.ts',
+  '**/guards/createEnumGuard.ts',
+  '**/index.ts',
+  'benchmarks/**/*.mjs',
+];
+
 export default defineConfig(
   {
-    ignores: [
-      'dist/**',
-      'node_modules/**',
-      'coverage/**',
-      'scripts/**',
-      'eslint.config.mjs',
-    ],
+    ignores: GENERAL_IGNORES,
   },
   ...tseslint.configs.recommended,
   zeroTolerance.configs.strict,
   {
     rules: {
       complexity: ['error', { max: 3 }],
-      'max-lines': [
-        'error',
-        { max: 25, skipComments: true, skipBlankLines: true },
-      ],
-      'max-lines-per-function': [
-        'error',
-        { max: 25, skipComments: true, skipBlankLines: true },
-      ],
+      'max-lines': MAX_LINES_RULE,
+      'max-lines-per-function': MAX_LINES_RULE,
     },
   },
   {
@@ -50,26 +58,16 @@ export default defineConfig(
     },
   },
   {
-    files: ['**/index.ts'],
+    files: MAX_LINES_EXEMPT_FILES,
     rules: {
       'max-lines': 'off',
     },
   },
   {
-    files: ['**/guards/createEnumGuard.ts'],
+    files: ['fixtures/**/*.cjs'],
     rules: {
-      'max-lines': 'off',
-    },
-  },
-  {
-    files: [
-      '**/__tests__/**/*.ts',
-      '**/*.test.ts',
-      '**/*.spec.ts',
-      'benchmarks/**/*.mjs',
-    ],
-    rules: {
-      'max-lines': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+      'zero-tolerance/no-dynamic-import': 'off',
     },
   },
 );

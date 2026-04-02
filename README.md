@@ -89,6 +89,16 @@ import { isString } from '@coderrob/typescript-type-guards';
 const { isString } = require('@coderrob/typescript-type-guards');
 ```
 
+Package metadata can also be resolved explicitly when needed:
+
+```js
+const packageMetadata = require('@coderrob/typescript-type-guards/package.json');
+```
+
+```ts
+import packageMetadata from '@coderrob/typescript-type-guards/package.json' with { type: 'json' };
+```
+
 Type declarations are emitted during build and included in the published package.
 
 The published tarball also includes the root `README.md`, `LICENSE`, and `package.json`. Those top-level files are included automatically by npm and are not copied into `dist/`.

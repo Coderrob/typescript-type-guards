@@ -1,11 +1,12 @@
-import assert from 'node:assert/strict';
-import { createRequire } from 'node:module';
+const assert = require('node:assert/strict');
 
 const ANSWER = Number('42');
-const requirePackage = createRequire(import.meta.url);
-const { createEnumGuard, isPlainObject, isString } = requirePackage(
-  '@coderrob/typescript-type-guards',
-);
+const {
+  createEnumGuard,
+  isPlainObject,
+  isString,
+} = require('@coderrob/typescript-type-guards');
+const packageMetadata = require('@coderrob/typescript-type-guards/package.json');
 
 const isStatus = createEnumGuard(
   {
@@ -15,6 +16,7 @@ const isStatus = createEnumGuard(
   'Status',
 );
 
+assert.equal(packageMetadata.name, '@coderrob/typescript-type-guards');
 assert.equal(isString('hello'), true);
 assert.equal(isPlainObject({ answer: ANSWER }), true);
 assert.equal(isStatus('ACTIVE'), true);
