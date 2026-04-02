@@ -82,7 +82,7 @@
     "package:quality": "npm run check:publint && npm run check:types:package",
     "prepack": "npm run clean && npm run build && npm run test:package && npm run typecheck",
     "prepublishOnly": "npm run verify && npm run test:coverage",
-    "publish:package": "npm pack --dry-run && npm publish --access public --provenance",
+    "publish:package": "npm pack --dry-run && npm publish --access public",
     "release:changesets": "npm run verify && npm run test:coverage && changeset publish",
     "release:version": "changeset version",
     "test": "vitest run --root . src/__tests__/runtime.test.ts --pool=threads --fileParallelism=false",
