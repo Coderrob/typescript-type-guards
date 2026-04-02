@@ -31,8 +31,8 @@ jobs:
       - name: Create release PR or publish package
         uses: changesets/action@v1
         with:
-          version: npm run changeset:version
-          publish: npm run release:publish
+          version: npm run release:version
+          publish: npm run release:changesets
           commit: 'chore: version package'
           title: 'chore: version package'
         env:

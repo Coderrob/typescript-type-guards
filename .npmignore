@@ -1,5 +1,7 @@
-# This project publishes via `"files": ["dist"]` in package.json, so this file
-# only acts as a secondary safeguard for files inside dist/.
+# This project publishes via `"files": ["dist"]` in package.json, which is the
+# primary allowlist for package contents. `.npmignore` still applies across the
+# packed artifact and can affect top-level files as well, so the negations
+# below explicitly preserve the root README and LICENSE.
 *.tsbuildinfo
 *.map
 !README.md

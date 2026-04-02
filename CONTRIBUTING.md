@@ -42,6 +42,7 @@ npm test
 npm run build
 npm run test:package
 npm run bench
+npm run publish:package
 ```
 
 ## Testing Expectations
@@ -63,7 +64,13 @@ npm run changeset
 Changesets are applied during release with:
 
 ```bash
-npm run changeset:version
+npm run release:version
+```
+
+Changesets can be published with:
+
+```bash
+npm run release:changesets
 ```
 
 ## Packaging Notes

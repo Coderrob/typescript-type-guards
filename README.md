@@ -125,8 +125,9 @@ npm run test:coverage
 npm run build
 npm run bench
 npm run changeset
-npm run changeset:version
-npm run changeset:publish
+npm run release:version
+npm run release:changesets
+npm run publish:package
 ```
 
 ## Verification
@@ -145,6 +146,7 @@ npm run test:coverage
 ## Releases
 
 - `npm run changeset` creates a release note entry for a package change.
-- `npm run changeset:version` applies pending changesets and updates the changelog.
-- `npm run release:publish` runs the full verification stack, coverage, and publishes through Changesets.
+- `npm run release:version` applies pending changesets and updates the changelog.
+- `npm run release:changesets` runs the full verification stack, coverage, and then publishes through Changesets.
+- `npm run publish:package` performs a direct npm publish with a dry-run pack check first.
 - `.github/workflows/release.yml` is a manual `workflow_dispatch` workflow for optional release publishing.
