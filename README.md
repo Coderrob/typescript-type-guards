@@ -8,9 +8,6 @@
   <a href="https://www.npmjs.com/package/@coderrob/typescript-type-guards">
     <img src="https://img.shields.io/npm/v/%40coderrob%2Ftypescript-type-guards?logo=npm&logoColor=white" alt="npm version" />
   </a>
-  <a href="https://www.npmjs.com/package/@coderrob/typescript-type-guards">
-    <img src="https://img.shields.io/npm/dm/%40coderrob%2Ftypescript-type-guards?logo=npm&logoColor=white" alt="npm downloads" />
-  </a>
   <a href="https://github.com/Coderrob/typescript-type-guards/actions/workflows/ci.yml">
     <img src="https://img.shields.io/github/actions/workflow/status/Coderrob/typescript-type-guards/ci.yml?branch=main&label=ci" alt="CI status" />
   </a>
