@@ -4,4 +4,4 @@
 
 # Build artifacts that should not be published
 *.tsbuildinfo
-*.js.map
+*.map
