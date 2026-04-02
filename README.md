@@ -4,6 +4,23 @@
   <img src="public/img/typescript-type-guard-logo.png" alt="typescript-type-guards logo" />
 </p>
 
+<p align="center">
+  <a href="https://www.npmjs.com/package/@coderrob/typescript-type-guards">
+    <img src="https://img.shields.io/npm/v/%40coderrob%2Ftypescript-type-guards?logo=npm&logoColor=white" alt="npm version" />
+  </a>
+  <a href="https://www.npmjs.com/package/@coderrob/typescript-type-guards">
+    <img src="https://img.shields.io/npm/dm/%40coderrob%2Ftypescript-type-guards?logo=npm&logoColor=white" alt="npm downloads" />
+  </a>
+  <a href="https://github.com/Coderrob/typescript-type-guards/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/Coderrob/typescript-type-guards/ci.yml?branch=main&label=ci" alt="CI status" />
+  </a>
+  <img src="https://img.shields.io/badge/coverage-100%25-brightgreen" alt="Coverage 100%" />
+  <a href="LICENSE">
+    <img src="https://img.shields.io/badge/license-Apache%202.0-blue.svg" alt="Apache 2.0 license" />
+  </a>
+  <img src="https://img.shields.io/badge/node-20%20%7C%2022%20%7C%2024-339933?logo=node.js&logoColor=white" alt="Node.js 20, 22, and 24" />
+</p>
+
 Reusable TypeScript type guards for narrowing `unknown` values in application and library code.
 
 ## Installation
@@ -157,6 +174,6 @@ npm run test:coverage
 
 - `npm run changeset` creates a release note entry for a package change.
 - `npm run release:version` applies pending changesets and updates the changelog.
-- `npm run release:changesets` runs the full verification stack, coverage, and then publishes through Changesets.
+- `npm run release:changesets` runs the full verification stack, coverage, and then publishes through Changesets. In GitHub Actions, this release path also publishes with provenance.
 - `npm run publish:package` performs a direct npm publish with a dry-run pack check first.
 - `.github/workflows/release.yml` is a manual `workflow_dispatch` workflow for optional release publishing.

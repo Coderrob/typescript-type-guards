@@ -73,6 +73,10 @@ Changesets can be published with:
 npm run release:changesets
 ```
 
+The GitHub release workflow publishes with npm provenance enabled. The local
+`npm run publish:package` command does not force provenance, because npm only
+supports automatic provenance generation in supported CI providers.
+
 ## Packaging Notes
 
 - The package publishes built files from `dist/`.
