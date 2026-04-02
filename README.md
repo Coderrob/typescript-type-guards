@@ -12,7 +12,7 @@ Reusable TypeScript type guards for narrowing `unknown` values in application an
 npm install @coderrob/typescript-type-guards
 ```
 
-The package and its development tooling require Node.js `^20.19.0`, `^22.13.0`, or `>=24.0.0`.
+The package and its development tooling require Node.js `^20`, `^22`, or `^24`.
 
 ## Usage
 
