@@ -12,6 +12,8 @@ Reusable TypeScript type guards for narrowing `unknown` values in application an
 npm install @coderrob/typescript-type-guards
 ```
 
+The package and its development tooling require Node.js 20 or newer.
+
 ## Usage
 
 ```ts
@@ -119,4 +121,4 @@ npm run test:coverage
 - `npm run changeset` creates a release note entry for a package change.
 - `npm run changeset:version` applies pending changesets and updates the changelog.
 - `npm run release:publish` runs the full verification stack, coverage, and publishes through Changesets.
-- `.github/workflows/release.yml` automates release PR creation and npm publishing from `main`.
+- `.github/workflows/release.yml` is a manual `workflow_dispatch` workflow for optional release publishing.
