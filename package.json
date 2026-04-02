@@ -66,7 +66,7 @@
     "url": "git+https://github.com/Coderrob/typescript-type-guards.git"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --clean --target es2020",
+    "build": "tsup --config tsup.config.ts",
     "changeset": "changeset",
     "check:publint": "publint run --strict .",
     "check:types:package": "attw --pack .",
@@ -96,5 +96,5 @@
   "sideEffects": false,
   "type": "commonjs",
   "types": "dist/index.d.ts",
-  "version": "1.0.0"
+  "version": "1.0.1"
 }
