@@ -7,6 +7,9 @@
   },
   "description": "Reusable TypeScript type guards for narrowing unknown values in application and library code.",
   "devDependencies": {
+    "@emnapi/core": "^1.9.2",
+    "@emnapi/runtime": "^1.9.2",
+    "@emnapi/wasi-threads": "^1.2.1",
     "@arethetypeswrong/cli": "^0.18.2",
     "@changesets/cli": "^2.30.0",
     "@coderrob/eslint-plugin-zero-tolerance": "^1.2.2",
