@@ -1,28 +1,32 @@
-import { describe } from 'vitest';
-
 import { isNumber } from '../index';
 import {
+  NEGATIVE_FIVE_POINT_FIVE,
+  ONE,
+  ZERO,
   contractCase,
-  describeBehavioralContract,
+  describeGuardModule,
 } from './support/test-helpers';
 
-describe('isNumber', () => {
-  describeBehavioralContract(
-    isNumber,
-    [
-      contractCase('a positive integer', 1),
-      contractCase('zero', 0),
-      contractCase('a negative decimal', -5.5),
-      contractCase('positive infinity', Infinity),
-      contractCase('negative infinity', -Infinity),
-    ],
-    [
-      contractCase('NaN', NaN),
-      contractCase('a numeric string', '1'),
-      contractCase('an empty string', ''),
-      contractCase('the boolean false', false),
-      contractCase('null', null),
-      contractCase('undefined', undefined),
-    ],
-  );
-});
+const POSITIVE_USE_CASES = [
+  contractCase('a positive integer', ONE),
+  contractCase('zero', ZERO),
+  contractCase('a negative decimal', NEGATIVE_FIVE_POINT_FIVE),
+  contractCase('positive infinity', Infinity),
+  contractCase('negative infinity', -Infinity),
+];
+
+const NEGATIVE_USE_CASES = [
+  contractCase('NaN', Number.NaN),
+  contractCase('a numeric string', '1'),
+  contractCase('an empty string', ''),
+  contractCase('the boolean false', false),
+  contractCase('null', null),
+  contractCase('undefined', undefined),
+];
+
+describeGuardModule(
+  'isNumber',
+  isNumber,
+  POSITIVE_USE_CASES,
+  NEGATIVE_USE_CASES,
+);

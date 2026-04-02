@@ -1,25 +1,28 @@
-import { describe } from 'vitest';
-
 import { isBoolean } from '../index';
 import {
+  ONE,
+  ZERO,
   contractCase,
-  describeBehavioralContract,
+  describeGuardModule,
 } from './support/test-helpers';
 
-describe('isBoolean', () => {
-  describeBehavioralContract(
-    isBoolean,
-    [
-      contractCase('the boolean true', true),
-      contractCase('the boolean false', false),
-    ],
-    [
-      contractCase('the number one', 1),
-      contractCase('the number zero', 0),
-      contractCase('the string "true"', 'true'),
-      contractCase('an empty string', ''),
-      contractCase('null', null),
-      contractCase('undefined', undefined),
-    ],
-  );
-});
+const POSITIVE_USE_CASES = [
+  contractCase('the boolean true', true),
+  contractCase('the boolean false', false),
+];
+
+const NEGATIVE_USE_CASES = [
+  contractCase('the number one', ONE),
+  contractCase('the number zero', ZERO),
+  contractCase('the string "true"', 'true'),
+  contractCase('an empty string', ''),
+  contractCase('null', null),
+  contractCase('undefined', undefined),
+];
+
+describeGuardModule(
+  'isBoolean',
+  isBoolean,
+  POSITIVE_USE_CASES,
+  NEGATIVE_USE_CASES,
+);

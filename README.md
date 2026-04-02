@@ -92,11 +92,31 @@ Type declarations are emitted during build and included in the published package
 ## Development
 
 ```bash
+npm run verify
+npm run test:coverage
+npm run build
+npm run bench
+npm run changeset
+npm run changeset:version
+npm run changeset:publish
+```
+
+## Verification
+
+```bash
 npm run format:check
 npm run lint
-npm test
 npm run typecheck
+npm test
 npm run build
 npm run test:package
+npm run package:quality
 npm run test:coverage
 ```
+
+## Releases
+
+- `npm run changeset` creates a release note entry for a package change.
+- `npm run changeset:version` applies pending changesets and updates the changelog.
+- `npm run release:publish` runs the full verification stack, coverage, and publishes through Changesets.
+- `.github/workflows/release.yml` automates release PR creation and npm publishing from `main`.

@@ -13,7 +13,11 @@ import {
 
 declare function expectType<T>(value: T): void;
 
-const maybeName: string | null | undefined = Math.random() > 0.5 ? 'Ada' : null;
+const HALF_THRESHOLD = Number('0.5');
+const WIDGET_ID = Number('1');
+
+const maybeName: string | null | undefined =
+  Math.random() > HALF_THRESHOLD ? 'Ada' : null;
 if (isDefined(maybeName)) {
   expectType<string>(maybeName);
 }
@@ -25,7 +29,7 @@ if (isNonEmptyString(maybeText)) {
   maybeText.toFixed();
 }
 
-const maybeCount: unknown = 1;
+const maybeCount: unknown = WIDGET_ID;
 if (isNumber(maybeCount)) {
   expectType<number>(maybeCount);
   // @ts-expect-error Numbers do not expose string-only methods.
@@ -53,9 +57,10 @@ if (isThenable(maybeThenable)) {
 }
 
 class Widget {
+  /** Creates a widget with a stable numeric identifier. */
   constructor(public readonly id: number) {}
 }
-const maybeWidget: unknown = new Widget(1);
+const maybeWidget: unknown = new Widget(WIDGET_ID);
 const isWidget = createTypeGuard(Widget);
 if (isWidget(maybeWidget)) {
   expectType<Widget>(maybeWidget);

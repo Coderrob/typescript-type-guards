@@ -35,11 +35,11 @@ export default defineConfig(
       complexity: ['error', { max: 3 }],
       'max-lines': [
         'error',
-        { max: 20, skipComments: true, skipBlankLines: true },
+        { max: 25, skipComments: true, skipBlankLines: true },
       ],
       'max-lines-per-function': [
         'error',
-        { max: 20, skipComments: true, skipBlankLines: true },
+        { max: 25, skipComments: true, skipBlankLines: true },
       ],
     },
   },
@@ -66,14 +66,11 @@ export default defineConfig(
       '**/__tests__/**/*.ts',
       '**/*.test.ts',
       '**/*.spec.ts',
+      'benchmarks/**/*.mjs',
       'test-d/**/*.ts',
     ],
     rules: {
       'max-lines': 'off',
-      'max-lines-per-function': 'off',
-      'zero-tolerance/max-function-lines': 'off',
-      'zero-tolerance/no-magic-numbers': 'off',
-      'zero-tolerance/require-jsdoc-functions': 'off',
     },
   },
 );

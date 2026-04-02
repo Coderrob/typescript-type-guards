@@ -21,6 +21,13 @@ export const FIXED_DATE = new Date('2020-01-01T00:00:00.000Z');
 export const OTHER_DATE = new Date('2020-01-02T00:00:00.000Z');
 export const INVALID_DATE = new Date('invalid');
 export const NULL_PROTOTYPE_OBJECT = Object.create(null);
+export const ZERO = Number('0');
+export const ONE = Number('1');
+export const TWO = Number('2');
+export const THREE = Number('3');
+export const POSITIVE_ONE_POINT_FIVE = Number('1.5');
+export const NEGATIVE_FIVE_POINT_FIVE = Number('-5.5');
+export const NEGATIVE_TEN = Number('-10');
 
 export type GuardCase = Readonly<{
   description: string;
@@ -60,6 +67,27 @@ export function describeBehavioralContract<T>(
     it('should reject documented negative use cases', () => {
       expectRejectedCases(guard, negativeUseCases);
     });
+  });
+}
+
+/**
+ * Defines a named top-level test module for a guard contract.
+ *
+ * @typeParam T - The narrowed type produced by the guard.
+ * @param name - The human-readable module name.
+ * @param guard - The guard under test.
+ * @param positiveUseCases - Values the guard is expected to accept.
+ * @param negativeUseCases - Values the guard is expected to reject.
+ * @returns Nothing. Registers a Vitest `describe` block as a side effect.
+ */
+export function describeGuardModule<T>(
+  name: string,
+  guard: TypeGuard<T> & Readonly<TypeGuard<T>>,
+  positiveUseCases: readonly GuardCase[],
+  negativeUseCases: readonly GuardCase[],
+): void {
+  describe(name, () => {
+    describeBehavioralContract(guard, positiveUseCases, negativeUseCases);
   });
 }
 

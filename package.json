@@ -7,6 +7,8 @@
   },
   "description": "Reusable TypeScript type guards for narrowing unknown values in application and library code.",
   "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.2",
+    "@changesets/cli": "^2.30.0",
     "@coderrob/eslint-plugin-zero-tolerance": "^1.2.0",
     "@typescript-eslint/parser": "^8.58.0",
     "@vitest/coverage-v8": "^4.1.2",
@@ -14,7 +16,9 @@
     "jscpd": "^4.0.8",
     "madge": "^8.0.0",
     "prettier": "^3.8.1",
+    "publint": "^0.3.18",
     "rimraf": "^5.0.10",
+    "tinybench": "^6.0.0",
     "tsup": "^8.5.1",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.58.0",
@@ -25,7 +29,10 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": {
+        "import": "./dist/index.d.mts",
+        "require": "./dist/index.d.ts"
+      },
       "import": "./dist/index.mjs",
       "require": "./dist/index.js",
       "default": "./dist/index.js"
@@ -56,7 +63,13 @@
   },
   "scripts": {
     "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean --target es2020",
+    "changeset": "changeset",
+    "changeset:publish": "changeset publish",
+    "changeset:version": "changeset version",
+    "check:publint": "publint run --strict .",
+    "check:types:package": "attw --pack .",
     "clean": "rimraf coverage dist",
+    "bench": "node benchmarks/guards.bench.mjs",
     "duplication": "jscpd src",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
@@ -64,15 +77,20 @@
     "lint:cycles": "madge --circular --extensions ts --ts-config tsconfig.json src/index.ts",
     "lint:eslint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "package:quality": "npm run check:publint && npm run check:types:package",
     "prepack": "npm run clean && npm run build && npm run test:package && npm run typecheck",
+    "prepublishOnly": "npm run verify && npm run test:coverage",
     "publish:package": "npm publish",
+    "release:publish": "npm run verify && npm run test:coverage && npm run changeset:publish",
     "test": "vitest run --root . src/__tests__/runtime.test.ts --pool=threads --fileParallelism=false",
     "test:package": "node scripts/check-package-interop.mjs",
     "test:types": "tsc -p tsconfig.type-tests.json --noEmit",
     "typecheck": "tsc -p tsconfig.json --noEmit && npm run test:types",
-    "test:coverage": "vitest run --root . src/__tests__/runtime.test.ts --pool=threads --fileParallelism=false --coverage --coverage.provider=v8 --coverage.all --coverage.include=src/**/*.ts --coverage.exclude=src/**/__tests__/** --coverage.exclude=src/index.ts --coverage.exclude=src/guards/types.ts --coverage.reporter=text --coverage.reporter=lcov --coverage.reporter=json-summary && node scripts/check-file-coverage.mjs"
+    "test:coverage": "vitest run --root . src/__tests__/runtime.test.ts --pool=threads --fileParallelism=false --coverage --coverage.provider=v8 --coverage.all --coverage.include=src/**/*.ts --coverage.exclude=src/**/__tests__/** --coverage.exclude=src/index.ts --coverage.exclude=src/guards/types.ts --coverage.reporter=text --coverage.reporter=lcov --coverage.reporter=json-summary && node scripts/check-file-coverage.mjs",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build && npm run test:package && npm run package:quality"
   },
   "sideEffects": false,
+  "type": "commonjs",
   "types": "dist/index.d.ts",
   "version": "1.0.0"
 }

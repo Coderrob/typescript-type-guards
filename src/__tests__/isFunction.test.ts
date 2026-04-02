@@ -1,27 +1,29 @@
-import { describe } from 'vitest';
-
 import { isFunction } from '../index';
 import {
+  ZERO,
   contractCase,
-  describeBehavioralContract,
+  describeGuardModule,
 } from './support/test-helpers';
 
-describe('isFunction', () => {
-  describeBehavioralContract(
-    isFunction,
-    [
-      contractCase('an arrow function', () => void 0),
-      contractCase('a function declaration expression', function () {}),
-    ],
-    [
-      contractCase('a plain object', {}),
-      contractCase('an empty array', []),
-      contractCase('a populated string', 'fn'),
-      contractCase('an empty string', ''),
-      contractCase('the number zero', 0),
-      contractCase('the boolean false', false),
-      contractCase('null', null),
-      contractCase('undefined', undefined),
-    ],
-  );
-});
+const POSITIVE_USE_CASES = [
+  contractCase('an arrow function', () => void 0),
+  contractCase('a function declaration expression', function () {}),
+];
+
+const NEGATIVE_USE_CASES = [
+  contractCase('a plain object', {}),
+  contractCase('an empty array', []),
+  contractCase('a populated string', 'fn'),
+  contractCase('an empty string', ''),
+  contractCase('the number zero', ZERO),
+  contractCase('the boolean false', false),
+  contractCase('null', null),
+  contractCase('undefined', undefined),
+];
+
+describeGuardModule(
+  'isFunction',
+  isFunction,
+  POSITIVE_USE_CASES,
+  NEGATIVE_USE_CASES,
+);

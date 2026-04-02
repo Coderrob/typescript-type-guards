@@ -1,25 +1,27 @@
-import { describe } from 'vitest';
-
 import { isRegExp } from '../index';
 import {
+  ZERO,
   contractCase,
-  describeBehavioralContract,
+  describeGuardModule,
 } from './support/test-helpers';
 
-describe('isRegExp', () => {
-  describeBehavioralContract(
-    isRegExp,
-    [
-      contractCase('a regex literal', /abc/),
-      contractCase('a RegExp instance', new RegExp('abc')),
-    ],
-    [
-      contractCase('a regex-like string', '/abc/'),
-      contractCase('an empty string', ''),
-      contractCase('the number zero', 0),
-      contractCase('the boolean false', false),
-      contractCase('null', null),
-      contractCase('undefined', undefined),
-    ],
-  );
-});
+const POSITIVE_USE_CASES = [
+  contractCase('a regex literal', /abc/),
+  contractCase('a RegExp instance', new RegExp('abc')),
+];
+
+const NEGATIVE_USE_CASES = [
+  contractCase('a regex-like string', '/abc/'),
+  contractCase('an empty string', ''),
+  contractCase('the number zero', ZERO),
+  contractCase('the boolean false', false),
+  contractCase('null', null),
+  contractCase('undefined', undefined),
+];
+
+describeGuardModule(
+  'isRegExp',
+  isRegExp,
+  POSITIVE_USE_CASES,
+  NEGATIVE_USE_CASES,
+);

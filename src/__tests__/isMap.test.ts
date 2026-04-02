@@ -1,26 +1,28 @@
-import { describe } from 'vitest';
-
 import { isMap } from '../index';
 import {
+  ZERO,
   contractCase,
-  describeBehavioralContract,
+  describeGuardModule,
 } from './support/test-helpers';
 
-describe('isMap', () => {
-  describeBehavioralContract(
-    isMap,
-    [
-      contractCase('an empty Map', new Map()),
-      contractCase('a populated Map', new Map([['key', 'val']])),
-    ],
-    [
-      contractCase('a plain object', {}),
-      contractCase('an empty array', []),
-      contractCase('an empty string', ''),
-      contractCase('the number zero', 0),
-      contractCase('the boolean false', false),
-      contractCase('null', null),
-      contractCase('undefined', undefined),
-    ],
-  );
-});
+const POSITIVE_USE_CASES = [
+  contractCase('an empty Map', new Map()),
+  contractCase('a populated Map', new Map([['key', 'val']])),
+];
+
+const NEGATIVE_USE_CASES = [
+  contractCase('a plain object', {}),
+  contractCase('an empty array', []),
+  contractCase('an empty string', ''),
+  contractCase('the number zero', ZERO),
+  contractCase('the boolean false', false),
+  contractCase('null', null),
+  contractCase('undefined', undefined),
+];
+
+describeGuardModule(
+  'isMap',
+  isMap,
+  POSITIVE_USE_CASES,
+  NEGATIVE_USE_CASES,
+);

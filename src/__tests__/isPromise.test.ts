@@ -1,28 +1,30 @@
-import { describe } from 'vitest';
-
 import { isPromise } from '../index';
 import {
+  ZERO,
   contractCase,
-  describeBehavioralContract,
+  describeGuardModule,
 } from './support/test-helpers';
 
-describe('isPromise', () => {
-  describeBehavioralContract(
-    isPromise,
-    [
-      contractCase('a resolved Promise', Promise.resolve()),
-      contractCase(
-        'a handled rejected Promise',
-        Promise.reject(new Error('expected rejection')).catch(() => void 0),
-      ),
-    ],
-    [
-      contractCase('a thenable object', { then: () => {} }),
-      contractCase('an empty string', ''),
-      contractCase('the number zero', 0),
-      contractCase('the boolean false', false),
-      contractCase('null', null),
-      contractCase('undefined', undefined),
-    ],
-  );
-});
+const POSITIVE_USE_CASES = [
+  contractCase('a resolved Promise', Promise.resolve()),
+  contractCase(
+    'a handled rejected Promise',
+    Promise.reject(new Error('expected rejection')).catch(() => void 0),
+  ),
+];
+
+const NEGATIVE_USE_CASES = [
+  contractCase('a thenable object', { then: () => {} }),
+  contractCase('an empty string', ''),
+  contractCase('the number zero', ZERO),
+  contractCase('the boolean false', false),
+  contractCase('null', null),
+  contractCase('undefined', undefined),
+];
+
+describeGuardModule(
+  'isPromise',
+  isPromise,
+  POSITIVE_USE_CASES,
+  NEGATIVE_USE_CASES,
+);

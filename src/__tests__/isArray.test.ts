@@ -1,27 +1,32 @@
-import { describe } from 'vitest';
-
 import { isArray } from '../index';
 import {
+  ONE,
+  THREE,
+  TWO,
+  ZERO,
   contractCase,
-  describeBehavioralContract,
+  describeGuardModule,
 } from './support/test-helpers';
 
-describe('isArray', () => {
-  describeBehavioralContract(
-    isArray,
-    [
-      contractCase('an empty array', []),
-      contractCase('an array of numbers', [1, 2, 3]),
-      contractCase('a mixed array', ['a', false, null]),
-    ],
-    [
-      contractCase('a plain object', {}),
-      contractCase('a populated string', 'array'),
-      contractCase('an empty string', ''),
-      contractCase('the number zero', 0),
-      contractCase('the boolean false', false),
-      contractCase('null', null),
-      contractCase('undefined', undefined),
-    ],
-  );
-});
+const POSITIVE_USE_CASES = [
+  contractCase('an empty array', []),
+  contractCase('an array of numbers', [ONE, TWO, THREE]),
+  contractCase('a mixed array', ['a', false, null]),
+];
+
+const NEGATIVE_USE_CASES = [
+  contractCase('a plain object', {}),
+  contractCase('a populated string', 'array'),
+  contractCase('an empty string', ''),
+  contractCase('the number zero', ZERO),
+  contractCase('the boolean false', false),
+  contractCase('null', null),
+  contractCase('undefined', undefined),
+];
+
+describeGuardModule(
+  'isArray',
+  isArray,
+  POSITIVE_USE_CASES,
+  NEGATIVE_USE_CASES,
+);
