@@ -43,7 +43,7 @@
   ],
   "license": "Apache-2.0",
   "main": "dist/index.js",
-  "name": "typescript-type-guards",
+  "name": "@coderrob/typescript-type-guards",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Coderrob/typescript-type-guards.git"
