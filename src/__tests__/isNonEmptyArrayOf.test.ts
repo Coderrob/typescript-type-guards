@@ -25,10 +25,10 @@ const STRING_NEGATIVE_USE_CASES = [
 
 const NUMBER_POSITIVE_USE_CASES = [
   contractCase('a single-number array', [ONE]),
-  contractCase(
-    'a non-empty array of finite numbers',
-    [ZERO, NEGATIVE_FIVE_POINT_FIVE],
-  ),
+  contractCase('a non-empty array of finite numbers', [
+    ZERO,
+    NEGATIVE_FIVE_POINT_FIVE,
+  ]),
 ];
 
 const NUMBER_NEGATIVE_USE_CASES = [
@@ -37,15 +37,8 @@ const NUMBER_NEGATIVE_USE_CASES = [
   contractCase('a populated string', 'array'),
 ];
 
-describe('isNonEmptyArrayOf', () => {
-  describe('when configured with isString', () => {
-    describeBehavioralContract(
-      isNonEmptyArrayOf(isString),
-      STRING_POSITIVE_USE_CASES,
-      STRING_NEGATIVE_USE_CASES,
-    );
-  });
-
+/** Defines the contract for non-empty number-array guards. */
+function describeNonEmptyNumberArrayContract(): void {
   describe('when configured with isNumber', () => {
     describeBehavioralContract(
       isNonEmptyArrayOf(isNumber),
@@ -53,4 +46,20 @@ describe('isNonEmptyArrayOf', () => {
       NUMBER_NEGATIVE_USE_CASES,
     );
   });
+}
+
+/** Defines the contract for non-empty string-array guards. */
+function describeNonEmptyStringArrayContract(): void {
+  describe('when configured with isString', () => {
+    describeBehavioralContract(
+      isNonEmptyArrayOf(isString),
+      STRING_POSITIVE_USE_CASES,
+      STRING_NEGATIVE_USE_CASES,
+    );
+  });
+}
+
+describe('isNonEmptyArrayOf', () => {
+  describeNonEmptyStringArrayContract();
+  describeNonEmptyNumberArrayContract();
 });

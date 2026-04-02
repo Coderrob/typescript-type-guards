@@ -21,9 +21,4 @@ const NEGATIVE_USE_CASES = [
   contractCase('undefined', undefined),
 ];
 
-describeGuardModule(
-  'isSet',
-  isSet,
-  POSITIVE_USE_CASES,
-  NEGATIVE_USE_CASES,
-);
+describeGuardModule('isSet', isSet, POSITIVE_USE_CASES, NEGATIVE_USE_CASES);

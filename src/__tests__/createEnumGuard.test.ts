@@ -72,7 +72,19 @@ const SIZE_NEGATIVE_USE_CASES = [
   contractCase('the boolean false', false),
 ];
 
-describe('createEnumGuard', () => {
+/** Defines the contract for numeric enum guards. */
+function describeNumericEnumGuard(): void {
+  describe('when configured for a numeric enum', () => {
+    describeBehavioralContract(
+      isStatus,
+      STATUS_POSITIVE_USE_CASES,
+      STATUS_NEGATIVE_USE_CASES,
+    );
+  });
+}
+
+/** Defines the contract and naming behavior for string enum guards. */
+function describeStringEnumGuard(): void {
   describe('when configured for a string enum', () => {
     describeBehavioralContract(
       isColor,
@@ -84,15 +96,10 @@ describe('createEnumGuard', () => {
       expect(isColor.name).toBe('isColor');
     });
   });
+}
 
-  describe('when configured for a numeric enum', () => {
-    describeBehavioralContract(
-      isStatus,
-      STATUS_POSITIVE_USE_CASES,
-      STATUS_NEGATIVE_USE_CASES,
-    );
-  });
-
+/** Defines the contract and fallback naming behavior for unnamed enum guards. */
+function describeUnnamedEnumGuard(): void {
   describe('when configured without an explicit enum name', () => {
     describeBehavioralContract(
       isSize,
@@ -104,4 +111,10 @@ describe('createEnumGuard', () => {
       expect(isSize.name).toBe('isEnumValue');
     });
   });
+}
+
+describe('createEnumGuard', () => {
+  describeStringEnumGuard();
+  describeNumericEnumGuard();
+  describeUnnamedEnumGuard();
 });

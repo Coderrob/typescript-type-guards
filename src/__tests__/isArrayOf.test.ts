@@ -35,15 +35,8 @@ const NUMBER_NEGATIVE_USE_CASES = [
   contractCase('a populated string', 'array'),
 ];
 
-describe('isArrayOf', () => {
-  describe('when configured with isString', () => {
-    describeBehavioralContract(
-      isArrayOf(isString),
-      STRING_POSITIVE_USE_CASES,
-      STRING_NEGATIVE_USE_CASES,
-    );
-  });
-
+/** Defines the contract for number-array guards. */
+function describeNumberArrayContract(): void {
   describe('when configured with isNumber', () => {
     describeBehavioralContract(
       isArrayOf(isNumber),
@@ -51,4 +44,20 @@ describe('isArrayOf', () => {
       NUMBER_NEGATIVE_USE_CASES,
     );
   });
+}
+
+/** Defines the contract for string-array guards. */
+function describeStringArrayContract(): void {
+  describe('when configured with isString', () => {
+    describeBehavioralContract(
+      isArrayOf(isString),
+      STRING_POSITIVE_USE_CASES,
+      STRING_NEGATIVE_USE_CASES,
+    );
+  });
+}
+
+describe('isArrayOf', () => {
+  describeStringArrayContract();
+  describeNumberArrayContract();
 });

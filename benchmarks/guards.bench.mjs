@@ -24,9 +24,9 @@ const bench = new Bench({
   time: BENCH_DURATION_MS,
 });
 
-/** Benchmarks `isString` against a positive string input. */
-function benchmarkStringGuard() {
-  isString('guard');
+/** Benchmarks an enum guard against a positive enum value input. */
+function benchmarkEnumGuard() {
+  isStatus('ACTIVE');
 }
 
 /** Benchmarks `isNumber` against a positive number input. */
@@ -39,9 +39,9 @@ function benchmarkPlainObjectGuard() {
   isPlainObject({ answer: NUMERIC_VALUE });
 }
 
-/** Benchmarks an enum guard against a positive enum value input. */
-function benchmarkEnumGuard() {
-  isStatus('ACTIVE');
+/** Benchmarks `isString` against a positive string input. */
+function benchmarkStringGuard() {
+  isString('guard');
 }
 
 bench

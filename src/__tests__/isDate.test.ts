@@ -24,9 +24,4 @@ const NEGATIVE_USE_CASES = [
   contractCase('undefined', undefined),
 ];
 
-describeGuardModule(
-  'isDate',
-  isDate,
-  POSITIVE_USE_CASES,
-  NEGATIVE_USE_CASES,
-);
+describeGuardModule('isDate', isDate, POSITIVE_USE_CASES, NEGATIVE_USE_CASES);

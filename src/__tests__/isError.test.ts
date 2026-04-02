@@ -20,9 +20,4 @@ const NEGATIVE_USE_CASES = [
   contractCase('undefined', undefined),
 ];
 
-describeGuardModule(
-  'isError',
-  isError,
-  POSITIVE_USE_CASES,
-  NEGATIVE_USE_CASES,
-);
+describeGuardModule('isError', isError, POSITIVE_USE_CASES, NEGATIVE_USE_CASES);

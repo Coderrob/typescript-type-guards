@@ -57,7 +57,7 @@ if (isThenable(maybeThenable)) {
 }
 
 class Widget {
-  /** Creates a widget with a stable numeric identifier. */
+  /** Creates a widget with a stable numeric identifier.\n   * @param id - The numeric identifier assigned to the widget.\n   */
   constructor(public readonly id: number) {}
 }
 const maybeWidget: unknown = new Widget(WIDGET_ID);
