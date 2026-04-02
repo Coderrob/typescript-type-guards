@@ -6,8 +6,8 @@ This repository uses Changesets for versioning and changelog automation.
 
 ```bash
 npm run changeset
-npm run changeset:version
-npm run changeset:publish
+npm run release:version
+npm run release:changesets
 ```
 
 Create a changeset whenever a pull request changes the published package in a way
