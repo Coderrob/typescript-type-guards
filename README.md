@@ -89,7 +89,19 @@ import { isString } from '@coderrob/typescript-type-guards';
 const { isString } = require('@coderrob/typescript-type-guards');
 ```
 
+Package metadata can also be resolved explicitly when needed:
+
+```js
+const packageMetadata = require('@coderrob/typescript-type-guards/package.json');
+```
+
+```ts
+import packageMetadata from '@coderrob/typescript-type-guards/package.json' with { type: 'json' };
+```
+
 Type declarations are emitted during build and included in the published package.
+
+The published tarball also includes the root `README.md`, `LICENSE`, and `package.json`. Those top-level files are included automatically by npm and are not copied into `dist/`.
 
 ## Benchmarks
 
@@ -112,14 +124,20 @@ These are indicative micro-benchmark results from a single local machine. They a
 
 ## Development
 
+See also:
+
+- `CONTRIBUTING.md` for local setup, verification, and contribution expectations
+- `CHANGELOG.md` for release history
+
 ```bash
 npm run verify
 npm run test:coverage
 npm run build
 npm run bench
 npm run changeset
-npm run changeset:version
-npm run changeset:publish
+npm run release:version
+npm run release:changesets
+npm run publish:package
 ```
 
 ## Verification
@@ -138,6 +156,7 @@ npm run test:coverage
 ## Releases
 
 - `npm run changeset` creates a release note entry for a package change.
-- `npm run changeset:version` applies pending changesets and updates the changelog.
-- `npm run release:publish` runs the full verification stack, coverage, and publishes through Changesets.
+- `npm run release:version` applies pending changesets and updates the changelog.
+- `npm run release:changesets` runs the full verification stack, coverage, and then publishes through Changesets.
+- `npm run publish:package` performs a direct npm publish with a dry-run pack check first.
 - `.github/workflows/release.yml` is a manual `workflow_dispatch` workflow for optional release publishing.

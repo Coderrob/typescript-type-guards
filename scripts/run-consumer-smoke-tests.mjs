@@ -19,7 +19,7 @@ const require = createRequire(import.meta.url);
 
 prepareTempDirectory();
 installPackagedFiles();
-await runFixture('cjs-consumer', 'smoke.mjs');
+await runFixture('cjs-consumer', 'smoke.cjs');
 await runFixture('esm-consumer', 'smoke.mjs');
 rmSync(TEMP_ROOT, { force: true, recursive: true });
 

@@ -5,6 +5,7 @@ import {
   isPlainObject,
   isString,
 } from '@coderrob/typescript-type-guards';
+import packageMetadata from '@coderrob/typescript-type-guards/package.json' with { type: 'json' };
 
 const isStatus = createEnumGuard(
   {
@@ -14,6 +15,7 @@ const isStatus = createEnumGuard(
   'Status',
 );
 
+assert.equal(packageMetadata.name, '@coderrob/typescript-type-guards');
 assert.equal(isString('hello'), true);
 const ANSWER = Number('42');
 
