@@ -7,26 +7,28 @@
   },
   "description": "Reusable TypeScript type guards for narrowing unknown values in application and library code.",
   "devDependencies": {
-    "@coderrob/eslint-plugin-zero-tolerance": "^1.1.4",
-    "@types/jest": "^30.0.0",
-    "@typescript-eslint/parser": "^8.57.0",
-    "eslint": "^9.29.0",
-    "jest": "^30.3.0",
+    "@coderrob/eslint-plugin-zero-tolerance": "^1.2.0",
+    "@typescript-eslint/parser": "^8.58.0",
+    "@vitest/coverage-v8": "^4.1.2",
+    "eslint": "^9.39.4",
     "jscpd": "^4.0.8",
+    "madge": "^8.0.0",
     "prettier": "^3.8.1",
     "rimraf": "^5.0.10",
-    "ts-jest": "^29.4.6",
+    "tsup": "^8.5.1",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.57.0"
+    "typescript-eslint": "^8.58.0",
+    "vitest": "^4.1.2"
   },
   "engines": {
     "node": ">=18"
   },
   "exports": {
     ".": {
-      "default": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "default": "./dist/index.js"
     }
   },
   "files": [
@@ -42,7 +44,8 @@
     "utility"
   ],
   "license": "Apache-2.0",
-  "main": "dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "name": "@coderrob/typescript-type-guards",
   "publishConfig": {
     "access": "public"
@@ -52,16 +55,22 @@
     "url": "git+https://github.com/Coderrob/typescript-type-guards.git"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "clean": "rimraf dist",
+    "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean --target es2020",
+    "clean": "rimraf coverage dist",
     "duplication": "jscpd src",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint .",
+    "lint": "npm run lint:eslint && npm run lint:cycles",
+    "lint:cycles": "madge --circular --extensions ts --ts-config tsconfig.json src/index.ts",
+    "lint:eslint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "prepack": "npm run clean && npm run build",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "prepack": "npm run clean && npm run build && npm run test:package && npm run typecheck",
+    "publish:package": "npm publish",
+    "test": "vitest run --root . src/__tests__/runtime.test.ts --pool=threads --fileParallelism=false",
+    "test:package": "node scripts/check-package-interop.mjs",
+    "test:types": "tsc -p tsconfig.type-tests.json --noEmit",
+    "typecheck": "tsc -p tsconfig.json --noEmit && npm run test:types",
+    "test:coverage": "vitest run --root . src/__tests__/runtime.test.ts --pool=threads --fileParallelism=false --coverage --coverage.provider=v8 --coverage.all --coverage.include=src/**/*.ts --coverage.exclude=src/**/__tests__/** --coverage.exclude=src/index.ts --coverage.exclude=src/guards/types.ts --coverage.reporter=text --coverage.reporter=lcov --coverage.reporter=json-summary && node scripts/check-file-coverage.mjs"
   },
   "sideEffects": false,
   "types": "dist/index.d.ts",

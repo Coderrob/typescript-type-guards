@@ -1,4 +1,4 @@
-# typescript-type-guards
+# @coderrob/typescript-type-guards
 
 <p align="center">
   <img src="public/img/typescript-type-guard-logo.png" alt="typescript-type-guards logo" />
@@ -9,7 +9,7 @@ Reusable TypeScript type guards for narrowing `unknown` values in application an
 ## Installation
 
 ```bash
-npm install typescript-type-guards
+npm install @coderrob/typescript-type-guards
 ```
 
 ## Usage
@@ -22,8 +22,9 @@ import {
   isDefined,
   isNonEmptyString,
   isNumber,
+  isPlainObject,
   isString,
-} from 'typescript-type-guards';
+} from '@coderrob/typescript-type-guards';
 
 const values: unknown[] = ['a', 'b', 'c'];
 
@@ -58,6 +59,12 @@ const input: unknown = new User(1);
 if (isUser(input) && isNumber(input.id)) {
   console.log(input.id);
 }
+
+const maybeConfig: unknown = { retries: 3 };
+
+if (isPlainObject(maybeConfig)) {
+  console.log(maybeConfig.retries);
+}
 ```
 
 ## Included guards
@@ -65,22 +72,31 @@ if (isUser(input) && isNumber(input.id)) {
 - Primitive guards: `isString`, `isNumber`, `isBoolean`, `isBigInt`, `isSymbol`, `isNull`, `isUndefined`, `isNullish`, `isNullOrUndefined`
 - Numeric guards: `isFiniteNumber`, `isInteger`, `isNaN`
 - Collection guards: `isArray`, `isNonEmptyArray`, `isArrayOf`, `isNonEmptyArrayOf`, `isMap`, `isSet`
-- Object-like guards: `isObject`, `isFunction`, `isError`, `isRegExp`, `isDate`, `isValidDate`, `isPromise`, `isThenable`
+- Object-like guards: `isObject`, `isPlainObject`, `isFunction`, `isError`, `isRegExp`, `isDate`, `isValidDate`, `isPromise`, `isThenable`
 - Utility guards: `isDefined`, `isNonEmptyString`, `createTypeGuard`, `createEnumGuard`
 
 ## Package output
 
-The published package exposes a single public entrypoint:
+The published package exposes a single public entrypoint with both ESM and CommonJS support:
 
 ```ts
-import { isString } from 'typescript-type-guards';
+import { isString } from '@coderrob/typescript-type-guards';
 ```
 
-Type declarations are emitted to `dist/*.d.ts` during build and are included in the published package.
+```js
+const { isString } = require('@coderrob/typescript-type-guards');
+```
+
+Type declarations are emitted during build and included in the published package.
 
 ## Development
 
 ```bash
+npm run format:check
+npm run lint
 npm test
+npm run typecheck
 npm run build
+npm run test:package
+npm run test:coverage
 ```

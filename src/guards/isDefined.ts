@@ -13,6 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+import { isNullish } from './isNullish';
+
 /**
  * Determines whether the given value is neither `null` nor `undefined`.
  *
@@ -22,5 +24,5 @@
 export function isDefined<T>(
   value: T | null | undefined,
 ): value is NonNullable<T> {
-  return value !== null && value !== undefined;
+  return !isNullish(value);
 }

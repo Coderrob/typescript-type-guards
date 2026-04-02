@@ -13,26 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * Checks whether an object has a plain-object prototype.
- *
- * @param value - The object to inspect.
- * @returns `true` when the object prototype is `Object.prototype` or `null`.
- */
-function hasPlainObjectPrototype(value: object): boolean {
-  const prototype = Object.getPrototypeOf(value);
-  return prototype === Object.prototype || prototype === null;
-}
-
-/**
- * Checks whether a value is a non-null object and not an array.
- *
- * @param value - The value to inspect.
- * @returns `true` when the value is object-like for plain-object checks.
- */
-export function isObject(value: unknown): value is Record<string, unknown> {
-  return isObjectLike(value) && hasPlainObjectPrototype(value);
-}
+import {
+  hasPlainObjectPrototype,
+  isNonArrayObject,
+} from './internal/objectHelpers';
 
 /**
  * Determines whether the given value is a non-null, non-array plain object.
@@ -40,6 +24,10 @@ export function isObject(value: unknown): value is Record<string, unknown> {
  * @param value - The value to test.
  * @returns `true` when `value` is a non-null object that is not an array, `false` otherwise.
  */
-function isObjectLike(value: unknown): value is object {
-  return typeof value === 'object' && value !== null && !Array.isArray(value);
+export function isObject(value: unknown): value is Record<string, unknown> {
+  if (!isNonArrayObject(value)) {
+    return false;
+  }
+
+  return hasPlainObjectPrototype(value);
 }

@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 import { getEnumValues } from './getEnumValues';
+import { isNumber } from './isNumber';
+import { isString } from './isString';
 import { EnumLike, EnumValue, TypeGuard } from './types';
 
 /**
@@ -35,7 +37,7 @@ import { EnumLike, EnumValue, TypeGuard } from './types';
  * isDirection('LEFT'); // false
  */
 export function createEnumGuard<TEnum extends EnumLike>(
-  enumType: TEnum,
+  enumType: Readonly<TEnum>,
   enumName?: string,
 ): TypeGuard<EnumValue<TEnum>> {
   const enumValueSet = new Set(getEnumValues(enumType));
@@ -72,11 +74,21 @@ function getEnumGuardName(enumName?: string): string {
  * @returns `true` when value matches an enum member.
  */
 function hasEnumValue<TEnum extends EnumLike>(
-  enumValueSet: ReadonlySet<string | number>,
+  enumValueSet: Readonly<ReadonlySet<string | number>>,
   value: unknown,
 ): value is EnumValue<TEnum> {
-  return (
-    (typeof value === 'string' || typeof value === 'number') &&
-    enumValueSet.has(value)
-  );
+  return isEnumValueCandidate(value) && enumValueSet.has(value);
+}
+
+/**
+ * Determines whether a runtime value can match an enum member.
+ *
+ * This composes the primitive guards directly from sibling modules rather than
+ * re-exporting through `index.ts`, which avoids introducing a barrel cycle.
+ *
+ * @param value - The value to test.
+ * @returns `true` when the value is a string or non-NaN number.
+ */
+function isEnumValueCandidate(value: unknown): value is string | number {
+  return isString(value) || isNumber(value);
 }

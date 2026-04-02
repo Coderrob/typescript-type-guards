@@ -20,5 +20,5 @@
  * @returns `true` when `value` is `undefined`, `false` otherwise.
  */
 export function isUndefined(value: unknown): value is undefined {
-  return typeof value === 'undefined';
+  return value === undefined;
 }

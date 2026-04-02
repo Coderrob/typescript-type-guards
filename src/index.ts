@@ -33,6 +33,7 @@ export { isNullish } from './guards/isNullish';
 export { isNullOrUndefined } from './guards/isNullOrUndefined';
 export { isNumber } from './guards/isNumber';
 export { isObject } from './guards/isObject';
+export { isPlainObject } from './guards/isPlainObject';
 export { isPromise } from './guards/isPromise';
 export { isRegExp } from './guards/isRegExp';
 export { isSet } from './guards/isSet';

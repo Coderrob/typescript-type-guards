@@ -1,0 +1,72 @@
+import {
+  createEnumGuard,
+  createTypeGuard,
+  isArrayOf,
+  isDefined,
+  isNonEmptyString,
+  isNumber,
+  isPlainObject,
+  isString,
+  isThenable,
+  isValidDate,
+} from '../src/index';
+
+declare function expectType<T>(value: T): void;
+
+const maybeName: string | null | undefined = Math.random() > 0.5 ? 'Ada' : null;
+if (isDefined(maybeName)) {
+  expectType<string>(maybeName);
+}
+
+const maybeText: unknown = 'hello';
+if (isNonEmptyString(maybeText)) {
+  expectType<string>(maybeText);
+  // @ts-expect-error Strings do not expose number-only methods.
+  maybeText.toFixed();
+}
+
+const maybeCount: unknown = 1;
+if (isNumber(maybeCount)) {
+  expectType<number>(maybeCount);
+  // @ts-expect-error Numbers do not expose string-only methods.
+  maybeCount.toUpperCase();
+}
+
+const maybeValues: unknown = ['a', 'b'];
+if (isArrayOf(isString)(maybeValues)) {
+  expectType<string[]>(maybeValues);
+}
+
+const maybeRecord: unknown = { enabled: true };
+if (isPlainObject(maybeRecord)) {
+  expectType<Record<string, unknown>>(maybeRecord);
+}
+
+const maybeDate: unknown = new Date('2020-01-01T00:00:00.000Z');
+if (isValidDate(maybeDate)) {
+  expectType<Date>(maybeDate);
+}
+
+const maybeThenable: unknown = Promise.resolve('done');
+if (isThenable(maybeThenable)) {
+  expectType<PromiseLike<unknown>>(maybeThenable);
+}
+
+class Widget {
+  constructor(public readonly id: number) {}
+}
+const maybeWidget: unknown = new Widget(1);
+const isWidget = createTypeGuard(Widget);
+if (isWidget(maybeWidget)) {
+  expectType<Widget>(maybeWidget);
+}
+
+enum Status {
+  Active = 'ACTIVE',
+  Inactive = 'INACTIVE',
+}
+const maybeStatus: unknown = 'ACTIVE';
+const isStatus = createEnumGuard(Status, 'Status');
+if (isStatus(maybeStatus)) {
+  expectType<Status>(maybeStatus);
+}

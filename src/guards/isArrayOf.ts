@@ -27,14 +27,20 @@ import { TypeGuard } from './types';
  * isStringArray(['a', 'b']); // true
  * isStringArray(['a', 1]);   // false
  */
-export function isArrayOf<T>(guard: TypeGuard<T>): TypeGuard<T[]> {
+export function isArrayOf<T>(
+  guard: TypeGuard<T> & Readonly<TypeGuard<T>>,
+): TypeGuard<T[]> {
   /**
    * Checks whether every element of `value` satisfies the element guard.
    * @param value - The value to test.
    * @returns `true` when value is an array and every element passes the guard.
    */
   function isTypedArray(value: unknown): value is T[] {
-    return Array.isArray(value) && value.every(guard);
+    if (!Array.isArray(value)) {
+      return false;
+    }
+
+    return value.every(guard);
   }
   return isTypedArray;
 }
