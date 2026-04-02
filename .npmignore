@@ -1,7 +1,8 @@
-# This project uses `"files": ["dist"]` in package.json, so only files under
-# dist/ (plus standard top-level files like README/LICENSE) are published.
-# These patterns therefore only affect the contents of dist/, not the repo root.
-
-# Build artifacts that should not be published
+# This project publishes via `"files": ["dist"]` in package.json, which is the
+# primary allowlist for package contents. `.npmignore` still applies across the
+# packed artifact and can affect top-level files as well, so the negations
+# below explicitly preserve the root README and LICENSE.
 *.tsbuildinfo
 *.map
+!README.md
+!LICENSE
