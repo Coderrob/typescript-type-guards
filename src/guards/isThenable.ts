@@ -13,19 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/**
- * Narrows `value` to a non-null object or function.
- *
- * @param value - The value to test.
- * @returns `true` when `value` is a non-null object or a callable function.
- */
-function isObjectOrFunction(
-  value: unknown,
-): value is object | ((...args: unknown[]) => unknown) {
-  return (
-    value !== null && (typeof value === 'object' || typeof value === 'function')
-  );
-}
+import { hasCallableProperty } from './internal/hasCallableProperty';
 
 /**
  * Determines whether the given value is a thenable (duck-typed Promise).
@@ -37,9 +25,5 @@ function isObjectOrFunction(
  * @returns `true` when `value` has a callable `then` property, `false` otherwise.
  */
 export function isThenable(value: unknown): value is PromiseLike<unknown> {
-  if (!isObjectOrFunction(value)) {
-    return false;
-  }
-
-  return typeof Reflect.get(value, 'then') === 'function';
+  return hasCallableProperty(value, 'then');
 }

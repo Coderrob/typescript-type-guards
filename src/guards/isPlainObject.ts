@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-/** @type {import('ts-jest').JestConfigWithTsJest} */
-module.exports = {
-  preset: 'ts-jest',
-  testEnvironment: 'node',
-  roots: ['<rootDir>/src'],
-  testMatch: ['**/__tests__/**/*.test.ts'],
-  collectCoverageFrom: ['src/**/*.ts', '!src/**/__tests__/**'],
-  coverageThreshold: {
-    global: {
-      branches: 95,
-      functions: 95,
-      lines: 95,
-      statements: 95,
-    },
-  },
-  coverageReporters: ['text', 'lcov'],
-};
+import {
+  hasPlainObjectPrototype,
+  isNonArrayObject,
+} from './internal/objectHelpers';
+
+/**
+ * Determines whether the given value is a plain object with an object or null prototype.
+ *
+ * @param value - The value to test.
+ * @returns `true` when `value` is a plain object, `false` otherwise.
+ */
+export function isPlainObject(
+  value: unknown,
+): value is Record<string, unknown> {
+  if (!isNonArrayObject(value)) return false;
+  return hasPlainObjectPrototype(value);
+}

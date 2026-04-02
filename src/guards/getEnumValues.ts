@@ -24,7 +24,9 @@ import { EnumLike } from './types';
  * @param enumType - The enum object to extract values from.
  * @returns An array of forward enum values.
  */
-export function getEnumValues(enumType: EnumLike): (string | number)[] {
+export function getEnumValues(
+  enumType: Readonly<EnumLike>,
+): (string | number)[] {
   return Object.entries(enumType).filter(isForwardEntry).map(toEnumValue);
 }
 
@@ -34,7 +36,10 @@ export function getEnumValues(enumType: EnumLike): (string | number)[] {
  * @param entry - A key-value tuple from the enum object.
  * @returns `true` when the entry is not a numeric reverse-mapping key.
  */
-function isForwardEntry([key, value]: [string, string | number]): boolean {
+function isForwardEntry([key, value]: readonly [
+  string,
+  string | number,
+]): boolean {
   return !isReverseMappedKey(key, value);
 }
 
@@ -58,6 +63,8 @@ function isReverseMappedKey(key: string, value: string | number): boolean {
  * @param entry - A key-value tuple from the enum object.
  * @returns The enum value.
  */
-function toEnumValue([, value]: [string, string | number]): string | number {
+function toEnumValue([, value]: readonly [string, string | number]):
+  | string
+  | number {
   return value;
 }

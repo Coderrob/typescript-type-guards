@@ -22,5 +22,9 @@ import { isDate } from './isDate';
  * @returns `true` when `value` is a `Date` with a valid time value, `false` otherwise.
  */
 export function isValidDate(value: unknown): value is Date {
-  return isDate(value) && !Number.isNaN(value.getTime());
+  if (!isDate(value)) {
+    return false;
+  }
+
+  return !Number.isNaN(value.getTime());
 }

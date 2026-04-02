@@ -28,7 +28,7 @@ import { TypeGuard } from './types';
  * isStrings([]);          // false
  */
 export function isNonEmptyArrayOf<T>(
-  guard: TypeGuard<T>,
+  guard: TypeGuard<T> & Readonly<TypeGuard<T>>,
 ): TypeGuard<[T, ...T[]]> {
   /**
    * Checks whether value is a non-empty array with every element satisfying the guard.
@@ -36,7 +36,11 @@ export function isNonEmptyArrayOf<T>(
    * @returns `true` when value is non-empty and all elements pass the guard.
    */
   function isNonEmptyTypedArray(value: unknown): value is [T, ...T[]] {
-    return Array.isArray(value) && value.length > 0 && value.every(guard);
+    if (!Array.isArray(value) || value.length === 0) {
+      return false;
+    }
+
+    return value.every(guard);
   }
   return isNonEmptyTypedArray;
 }

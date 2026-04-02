@@ -36,7 +36,7 @@ import { Constructor, TypeGuard } from './types';
  * const isAnonymousThing = createTypeGuard(AnonymousThing, 'AnonymousThing');
  */
 export function createTypeGuard<T>(
-  constructor: Constructor<T>,
+  constructor: Constructor<T> & Readonly<Constructor<T>>,
   typeName?: string,
 ): TypeGuard<T> {
   const resolvedTypeName = typeName || constructor.name || 'Type';

@@ -1,6 +1,7 @@
 node_modules/
 dist/
 coverage/
+.tmp/
 .npm-cache/
 *.js.map
 *.tsbuildinfo

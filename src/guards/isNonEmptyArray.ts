@@ -24,5 +24,9 @@
 export function isNonEmptyArray(
   value: unknown,
 ): value is [unknown, ...unknown[]] {
-  return Array.isArray(value) && value.length > 0;
+  if (!Array.isArray(value)) {
+    return false;
+  }
+
+  return value.length > 0;
 }
