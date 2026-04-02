@@ -1,4 +1,4 @@
-import { isMap } from '../index';
+import { isMap } from '../guards/isMap';
 import {
   ZERO,
   contractCase,

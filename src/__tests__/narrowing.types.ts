@@ -1,15 +1,13 @@
-import {
-  createEnumGuard,
-  createTypeGuard,
-  isArrayOf,
-  isDefined,
-  isNonEmptyString,
-  isNumber,
-  isPlainObject,
-  isString,
-  isThenable,
-  isValidDate,
-} from '../src/index';
+import { createEnumGuard } from '../guards/createEnumGuard';
+import { createTypeGuard } from '../guards/createTypeGuard';
+import { isArrayOf } from '../guards/isArrayOf';
+import { isDefined } from '../guards/isDefined';
+import { isNonEmptyString } from '../guards/isNonEmptyString';
+import { isNumber } from '../guards/isNumber';
+import { isPlainObject } from '../guards/isPlainObject';
+import { isString } from '../guards/isString';
+import { isThenable } from '../guards/isThenable';
+import { isValidDate } from '../guards/isValidDate';
 
 declare function expectType<T>(value: T): void;
 

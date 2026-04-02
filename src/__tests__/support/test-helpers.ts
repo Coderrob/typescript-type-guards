@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 import { describe, expect, it } from 'vitest';
-
-import type { TypeGuard } from '../../index';
+import { TypeGuard } from '../../guards/types';
 
 export const FIXED_DATE = new Date('2020-01-01T00:00:00.000Z');
 export const OTHER_DATE = new Date('2020-01-02T00:00:00.000Z');

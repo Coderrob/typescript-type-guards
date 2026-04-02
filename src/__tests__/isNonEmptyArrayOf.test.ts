@@ -1,6 +1,8 @@
 import { describe } from 'vitest';
 
-import { isNonEmptyArrayOf, isNumber, isString } from '../index';
+import { isNonEmptyArrayOf } from '../guards/isNonEmptyArrayOf';
+import { isNumber } from '../guards/isNumber';
+import { isString } from '../guards/isString';
 import {
   NEGATIVE_FIVE_POINT_FIVE,
   ONE,

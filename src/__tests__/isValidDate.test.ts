@@ -1,4 +1,4 @@
-import { isValidDate } from '../index';
+import { isValidDate } from '../guards/isValidDate';
 import {
   FIXED_DATE,
   INVALID_DATE,

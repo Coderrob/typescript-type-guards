@@ -1,6 +1,6 @@
 import { describe } from 'vitest';
 
-import { isUndefined } from '../index';
+import { isUndefined } from '../guards/isUndefined';
 import {
   contractCase,
   describeBehavioralContract,

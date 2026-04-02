@@ -67,7 +67,6 @@ export default defineConfig(
       '**/*.test.ts',
       '**/*.spec.ts',
       'benchmarks/**/*.mjs',
-      'test-d/**/*.ts',
     ],
     rules: {
       'max-lines': 'off',
