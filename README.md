@@ -114,6 +114,11 @@ These are indicative micro-benchmark results from a single local machine. They a
 
 ## Development
 
+See also:
+
+- `CONTRIBUTING.md` for local setup, verification, and contribution expectations
+- `CHANGELOG.md` for release history
+
 ```bash
 npm run verify
 npm run test:coverage
