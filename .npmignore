@@ -1,0 +1,7 @@
+# This project uses `"files": ["dist"]` in package.json, so only files under
+# dist/ (plus standard top-level files like README/LICENSE) are published.
+# These patterns therefore only affect the contents of dist/, not the repo root.
+
+# Build artifacts that should not be published
+*.tsbuildinfo
+*.map
