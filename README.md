@@ -91,6 +91,8 @@ const { isString } = require('@coderrob/typescript-type-guards');
 
 Type declarations are emitted during build and included in the published package.
 
+The published tarball also includes the root `README.md`, `LICENSE`, and `package.json`. Those top-level files are included automatically by npm and are not copied into `dist/`.
+
 ## Benchmarks
 
 Run the local micro-benchmarks with:

@@ -65,7 +65,7 @@
     "url": "git+https://github.com/Coderrob/typescript-type-guards.git"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts --sourcemap --clean --target es2020",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean --target es2020",
     "changeset": "changeset",
     "changeset:publish": "changeset publish",
     "changeset:version": "changeset version",
@@ -83,7 +83,7 @@
     "package:quality": "npm run check:publint && npm run check:types:package",
     "prepack": "npm run clean && npm run build && npm run test:package && npm run typecheck",
     "prepublishOnly": "npm run verify && npm run test:coverage",
-    "publish:package": "npm publish",
+    "publish:package": "npm run verify && npm run test:coverage && npm pack --dry-run && npm publish --access public --provenance",
     "release:publish": "npm run verify && npm run test:coverage && npm run changeset:publish",
     "test": "vitest run --root . src/__tests__/runtime.test.ts --pool=threads --fileParallelism=false",
     "test:consumers": "node scripts/run-consumer-smoke-tests.mjs",
